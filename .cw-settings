@@ -1,0 +1,13 @@
+{
+<<<<<<< HEAD
+"contextRoot": "/index.jsp",
+=======
+"contextRoot": "/index.html",
+>>>>>>> branch 'master' of https://github.com/GkhnYlmz/jenga-bank.git
+"internalPort": "",
+"healthCheck": "",
+"isHttps": false,
+"ignoredPaths": [
+""
+]
+}

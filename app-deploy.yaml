@@ -1,0 +1,32 @@
+apiVersion: appsody.dev/v1beta1
+kind: AppsodyApplication
+metadata:
+  name: jenga-bank
+  namespace: bank-in-a-box
+spec:
+  # Add fields here
+  version: 1.0.0
+  applicationImage: dev.local/jenga-bank 
+  stack: java-microprofile
+  service:
+    type: NodePort
+    port: 9080
+    annotations:
+      prometheus.io/scrape: 'true'
+  readinessProbe:
+    failureThreshold: 12
+    httpGet:
+      path: /health/ready
+      port: 9080
+    initialDelaySeconds: 5
+    periodSeconds: 2
+    timeoutSeconds: 1
+  livenessProbe:
+    failureThreshold: 12
+    httpGet:
+      path: /health/live
+      port: 9080
+    initialDelaySeconds: 5
+    periodSeconds: 2
+  expose: true
+  createKnativeService: false

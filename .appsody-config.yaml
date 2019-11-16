@@ -1,0 +1,2 @@
+project-name: jenga-bank
+stack: appsody/java-microprofile:0.2
