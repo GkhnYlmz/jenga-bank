@@ -48,7 +48,7 @@ public class EftIslem extends HttpServlet {
 		
 		CallRestAPI.restCallPost(money, customerType, eftType);
 		
-		response.sendRedirect("/EFT_Summary.html");
+		response.sendRedirect("/EFT_Summary.jsp");
 		
 		
 	}

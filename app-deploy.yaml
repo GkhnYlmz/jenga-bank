@@ -1,18 +1,37 @@
 apiVersion: appsody.dev/v1beta1
 kind: AppsodyApplication
 metadata:
+  annotations:
+    commit.image.appsody.dev/author: gokhanyilmaz <gokhanyilmaz>
+    commit.image.appsody.dev/committer: gokhanyilmaz <gokhanyilmaz>
+    commit.image.appsody.dev/date: Sat Nov 16 15:33:11 2019 +0300
+    commit.image.appsody.dev/message: team song has added
+    image.opencontainers.org/created: "2019-11-16T17:24:14+03:00"
+    image.opencontainers.org/documentation: https://github.com/GkhnYlmz/jenga-bank
+    image.opencontainers.org/revision: 51a801491b5d41e6e76262c79faf263b2fdbea4d-modified
+    image.opencontainers.org/source: https://github.com/GkhnYlmz/jenga-bank/tree/master
+    image.opencontainers.org/url: https://github.com/GkhnYlmz/jenga-bank
+    stack.appsody.dev/configured: appsody/java-microprofile:0.2
+    stack.appsody.dev/created: 2019-11-15T10:51:40+0000
+    stack.appsody.dev/revision: 0a6c857b8506ef76f8a6ad8626a021e8eeaf68f0
+    stack.appsody.dev/tag: appsody/java-microprofile:0.2.19
+  creationTimestamp: null
+  labels:
+    image.opencontainers.org/title: jenga-bank
+    stack.appsody.dev/version: 0.2.19
   name: jenga-bank
   namespace: bank-in-a-box
 spec:
-  # Add fields here
-  version: 1.0.0
-  applicationImage: dev.local/jenga-bank 
-  stack: java-microprofile
-  service:
-    type: NodePort
-    port: 9080
-    annotations:
-      prometheus.io/scrape: 'true'
+  applicationImage: dev.local/jenga-bank
+  createKnativeService: false
+  expose: true
+  livenessProbe:
+    failureThreshold: 12
+    httpGet:
+      path: /health/live
+      port: 9080
+    initialDelaySeconds: 5
+    periodSeconds: 2
   readinessProbe:
     failureThreshold: 12
     httpGet:
@@ -21,12 +40,11 @@ spec:
     initialDelaySeconds: 5
     periodSeconds: 2
     timeoutSeconds: 1
-  livenessProbe:
-    failureThreshold: 12
-    httpGet:
-      path: /health/live
-      port: 9080
-    initialDelaySeconds: 5
-    periodSeconds: 2
-  expose: true
-  createKnativeService: false
+  service:
+    annotations:
+      prometheus.io/scrape: "true"
+    port: 9080
+    type: NodePort
+  stack: java-microprofile
+  version: 1.0.0
+status: {}
